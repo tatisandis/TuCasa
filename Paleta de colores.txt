@@ -1,0 +1,33 @@
+Paleta de colores
+negro :			#222831
+gris oscuro:	#393e46
+azul claro: 	#00adb5
+gris claro:		#eeeeee
+
+
+
+#00b2ff  azul bonito
+
+
+.js
+swal({
+  				title: "Se enviaron los datos",
+  				text: "Submit to run ajax request",
+  				type: "info",
+  				showCancelButton: true,
+  				closeOnConfirm: false,
+  				showLoaderOnConfirm: true,
+			},$.ajax({
+				url: "Usuario.php", 
+				data: {funcion: 'registrarUsuario', nombres:nombres, apellidos:apellidos,fechaNacimiento:fechaNacimiento, telefono:telefono, email:email, password:password }, 
+				type: 'POST', 
+				dtaType: 'html', 
+				success: function(respuestaHTML){
+					swal("Que bien!", ""+respuestaHTML, "success");
+					//alert("respuesta:"+respuestaHTML);
+					$("#resultado").html(respuestaHTML);
+				}, error : function(xhr, status){
+					alert('Lo sentimos hubo un error');
+				}
+				})
+		);
