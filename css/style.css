@@ -280,4 +280,9 @@ legend{
 	padding: 20px 5px;
     color: #00adb5;
 }
+
+.form-error{
+	font-size: 12px;
+	line-height: 70%;
+	color: red;
 }

@@ -45,6 +45,7 @@
 		<link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script> 
 		<script type="text/javascript" src="js/nouislider.min.js"></script>-->
+		
 		<!-- sweet alert :-->
  		<script src="js/sweetalert.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
@@ -56,7 +57,8 @@
          		$('.materialboxed').materialbox();
          		$(".button-collapse").sideNav();
 				$('.collapsible').collapsible();
-      
+      			$('.dropdown-button').dropdown({constrain_width:false});
+			});
          		/*var slider = document.getElementById('range-input');
 				  noUiSlider.create(slider, {
 				   start: [100000, 100000000],
@@ -70,11 +72,7 @@
 				     decimals: 0
 				   })
 				  });
-				*/
-				/*$('.dropdown-button').dropdown({
-					  constrain_width: false
-				});*/
-				/*
+								
 				var nodes = [
 					document.getElementById('min-valor'), // 0
 					document.getElementById('max-valor')  // 1
@@ -85,7 +83,6 @@
 					nodes[handle].innerHTML = values[handle] ;
 					//nodes[handle].innerHTML = values[handle] + ', ' + positions[handle].toFixed(2) + '%';
 				});*/
-			});
       </script>   
 </head>
 <body>
@@ -98,19 +95,19 @@
 				</li>
 			</ul>
 			<a href="#" data-activates="nav-mobile" class="button-collapse right"><i class="material-icons md-light">menu</i></a>
+			<input type="hidden" name="idUsuarioSesion" id="idUsuarioSesion" value="<?php echo($_SESSION['idUsuario']);?>">
+			<input type="hidden" name="emailSesion" id="emailSesion" value="<?php echo($_SESSION['email']);?>">
 				
 			<div class="header-search-wrapper hide-on-med-and-down">
 				<i class="material-icons" >search</i>
 				<input class="header-search-input z-depth-2" name="search" placeholder="Buscar" type="text">
-				
 			</div>
 			<ul class="right hide-on-med-and-down">
 				<li><a href="#"><i class="fa fa-user-circle"></i> <?php echo($_SESSION['email']);?> </a></li>
 				<li><a onclick="salir();"><i class="fa fa-sign-out"></i> Salir </a></li>
 			</ul>
 			<ul  class="right hide-on-large-only">
-				<input type="hidden" name="idUsuarioSesion" id="idUsuarioSesion" value="<?php echo($_SESSION['idUsuario']);?>">
-				<input type="hidden" name="emailSesion" id="emailSesion" value="<?php echo($_SESSION['email']);?>">
+				
 				<li><a href="#" title="<?php echo($_SESSION['email']);?>"><i class="fa fa-user-circle"></i></a></li>
 				<li><a onclick="salir();" title="Iniciar Sesión"><i class="fa fa-sign-out"></i></a></li>
 			</ul>
@@ -162,9 +159,9 @@
 						Consultar</div>
 					<div class="collapsible-body">
 						<ul>
-							<li><a href="#"><i class="fa fa-toggle-on" aria-hidden="true"></i>
+							<li><a href="PanelPrincipalPublicador.php" target="iframe"><i class="fa fa-toggle-on" aria-hidden="true"></i>
 Activas</a></li>
-							<li><a href="#"><i class="fa fa-toggle-off" aria-hidden="true"></i>
+							<li><a href="PanelPrincipalPublicador.php" target="iframe"><i class="fa fa-toggle-off" aria-hidden="true"></i>
 Inactivas</a></li>
 						</ul>
 					</div>

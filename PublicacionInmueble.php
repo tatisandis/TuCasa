@@ -9,6 +9,8 @@ require_once("ControladorBD.php");
 class PublicacionInmueble{
 	private $idUsuario, $noPublicaciones;
 	private $controlBD, $publicaciones, $pagina;
+	public $tipoPublicacion, $tipo_inmueble, $ciudad, $barrio, $direccion, $precio, $area, $estrato, $habitaciones, $banios, $pisos, $parqueadero, $estadoInmueble, $descripcion;
+	public $mensaje, $nuevoNombre;
 
 	function __construct()
 	{
@@ -17,7 +19,82 @@ class PublicacionInmueble{
 			if($_GET["funcion"] == 'obtenerDatosPubInmueblePorUsuario'){
 				$this->obtenerDatosPubInmueblePorUsuario();
 			}
+		}else if(isset($_POST["funcion"])){
+			if($_POST["funcion"] == 'registrarPublicacion'){
+				$this->registrarPublicacion();
+			}
 		}
+	}
+
+	public function registrarPublicacion()
+	{
+
+		session_start();
+		$idUsuario = $_SESSION["idUsuario"];
+
+		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+		{
+			$tipoPublicacion = $_POST["tipoPublicacion"];
+			$tipoInmueble = $_POST["tipoInmueble"];
+			$idCiudad = $_POST["ciudad"];
+			$barrio = $_POST["barrio"];
+			$direccion = $_POST["direccion"];
+			$precio = $_POST["precio"];
+			$area = $_POST["area"];
+			$estrato = $_POST["estrato"];
+			$estadoInmueble = $_POST["estadoInmueble"];
+			$habitaciones = $_POST["habitaciones"];
+			$banios = $_POST["banios"];
+			$pisos = $_POST["pisos"];
+			$parqueadero = $_POST["parqueadero"];
+			$descripcion = $_POST["descripcion"];
+
+		    for($i = 0; $i < sizeOf($_FILES["foto"]["name"]); $i++)
+		    {   //comprobamos si existe un directorio para subir el archivo si no es así, lo creamos
+			    /*if(!is_dir("uploads/")) 	mkdir("uploads/", 0777);*/
+			        
+				$nuevoNombre = $idUsuario."_". uniqid(); //Prefijar el id único
+
+			    //comprobamos si el archivo ha subido
+			    if ($_FILES["foto"]["name"][$i] && move_uploaded_file($_FILES['foto']['tmp_name'][$i],"uploads/".$nuevoNombre)){
+
+			    	$_FILES["foto"]["name"][$i] = $nuevoNombre;
+			       //$mensaje.="el fichero $i es válido y se subió con exito ".$nuevoNombre;//devolvemos el nombre del archivo para pintar la imagen
+				}
+			}
+
+			require_once("Fotos.php");
+			$fotos = new Fotos();
+
+			$array = $fotos->normalizarArregloFotos($_FILES);
+
+			
+			$ultimoIdInsertadoFotos  = $fotos->registrarFotos($array);
+
+			require_once("Inmueble.php");
+			$inmueble = new Inmueble();
+			$registrarInmueble = $inmueble->registrarInmueble($idCiudad, $tipoInmueble, $barrio, $precio, $estadoInmueble, $habitaciones, $banios, $pisos, $parqueadero, $estrato, $descripcion, $ultimoIdInsertadoFotos);
+
+			$idInmueble = $registrarInmueble;
+
+			$fecha = date('Y-m-j');
+			$fechaVencimiento = strtotime ( '+90 day' , strtotime ( $fecha ) ) ;
+			$fechaVencimiento = date ( 'Y-m-j' , $fechaVencimiento );
+ 		
+			$sql = "INSERT INTO PublicacionInmueble (idPublicacionInmueble, idInmueble_inmueble, idUsuario_usuario, tipoPublicacion, likesPublicacion, estadoPublicacion, fechaPublicacion, fechaVencimiento, publicacionVerificada) VALUES (NULL, '$idInmueble', '$idUsuario', '$tipoPublicacion', '0', '0', CURRENT_DATE(), '$fechaVencimiento', '0');";
+
+			$controlBD = new ControladorBD();
+			$registrarPublicacion = $controlBD->registrarBD($sql);
+
+			if($registrarPublicacion == true)
+			{
+				$ultimoId = $controlBD->consultarUltimoIdInsertado();
+				$mensaje = "Ya se registró la publicacion del inmueble con Id: $ultimoId.  En unas horas se revisará y una vez aprobada, su inmueble sera visto por todos. ";
+				echo($mensaje);
+
+			}else{ echo("Ocurrió un error al publicar el inmueble"); }	
+			
+		}else{ throw new Exception("Error Processing Request", 1);}
 	}
 
 	public function consultarNoPublicacionInmuebleUsuario()
@@ -39,6 +116,8 @@ class PublicacionInmueble{
 			return 0;
 		}	
 	}
+
+	/*--------------------------------------------------------------*/
 
 	public function obtenerDatosPubInmueblePorUsuario()
 	{
@@ -73,7 +152,7 @@ class PublicacionInmueble{
 		$total_paginas = ceil($totalRegistros / $noPaginas);
 		
 
-		$sql = "SELECT idPublicacionInmueble, idInmueble_inmueble, tipoPublicacion, likesPublicacion, fechaPublicacion, idCiudad_ciudad, tipo_inmueble, precio, descripcion, idFotos, srcFotos, nombreCiudad FROM PublicacionInmueble INNER JOIN Inmueble ON (idInmueble  = idInmueble_inmueble AND estadoPublicacion = 1 AND idUsuario_usuario = $idUsuario) LEFT JOIN Fotos ON  Fotos.idfotos_inmueble = Inmueble.idFotos LEFT JOIN Ciudad ON Ciudad.idCiudad = Inmueble.idCiudad_ciudad limit $inicio, $noPaginas;"; 
+		$sql = "SELECT idPublicacionInmueble, idInmueble_inmueble, tipoPublicacion, likesPublicacion, fechaPublicacion, idCiudad_ciudad, tipo_inmueble, precio, descripcion, idFotos_fotos, srcFotos, nombreCiudad FROM PublicacionInmueble INNER JOIN Inmueble ON (idInmueble  = idInmueble_inmueble AND estadoPublicacion = 1 AND idUsuario_usuario = $idUsuario) LEFT JOIN Fotos ON  Fotos.idfotos = Inmueble.idFotos_fotos LEFT JOIN Ciudad ON Ciudad.idCiudad = Inmueble.idCiudad_ciudad limit $inicio, $noPaginas;"; 
 
 
 		$publicaciones = $controlBD->obtenerDatosBD($sql); //retorna un array
@@ -108,7 +187,7 @@ class PublicacionInmueble{
 																	
 					$noFoto = $fotos[0]["no"];
 					$srcFoto = $fotos[0]["src"];
-					$descripcionFoto = $fotos[0]["descripcion"];
+					//$descripcionFoto = $fotos[0]["descripcion"];
 					
 					if($i > 2 && $i % 3 == 0)
 					{
@@ -122,7 +201,7 @@ class PublicacionInmueble{
 								<div class='card'>
 									<div class='card-image waves-effect waves-block waves-light'>
 									
-										<img src='images/".$srcFoto."'>
+										<img src='uploads/".$srcFoto."'>
 									</div>
 									<ul class='card-action-buttons'>
 										<li><a href='' class='btn-floating waves-effect waves-light green accent-4'><i class='material-icons'>share</i></a></li>

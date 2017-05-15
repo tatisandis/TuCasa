@@ -24,10 +24,17 @@ class ControladorBD extends ConexionBD
 		if($result)
 		{
 			$fila = $this->mysqli->affected_rows;
-			if($fila == 1){return true;}else return false;
-		}else echo("Ocurrió un error al intentar registrar el usuario: ". $this->mysqli->error);
+			if($fila == 1){
+				return true;
+			}else return false;
+		}else{ echo("Ocurrió un error al intentar registrar el usuario. Error en:".$this->mysqli->error.".");}
 
 		$this->mysqli->close(); // cerrar la conexion con BD
+	}
+
+	function consultarUltimoIdInsertado(){
+		$ultimoIdInsertado = $this->mysqli->insert_id;
+		return $ultimoIdInsertado;
 	}
 
 	public function consultarBD($sql){
@@ -45,6 +52,23 @@ class ControladorBD extends ConexionBD
 
 
 		$this->mysqli->close();	
+	}
+
+	public function consultarUnDatoBD($sql){
+		$result = $this->mysqli->query($sql);	
+
+		if($result)
+		{
+			$fila = $this->mysqli->affected_rows;
+
+			if($fila == 1)
+			{
+				return $fila;
+			}
+		}else echo("Ocurrió un error al consultar un Datos de la Base de Datos, intentelo de nuevo".$this->mysqli->error);
+
+
+		$this->mysqli->close();		
 	}
 
 	public function obtenerDatosBD($sql)

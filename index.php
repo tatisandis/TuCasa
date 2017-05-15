@@ -41,6 +41,9 @@
  	<!-- sweet alert :-->
  	<script src="js/sweetalert.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.61/jquery.form-validator.min.js" type="text/javascript" charset="utf-8" ></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.61/lang/es.js" type="text/javascript" charset="utf-8"></script>
  	<meta charset="UTF-8"/>
  	<script>
 	    $(document).ready(function(){
@@ -61,7 +64,9 @@
 				  hiddenName: true,
 				  formatSubmit: 'yyyy/mm/dd'
 			});
+			$.validate();
 	  	});
+	  	
   	</script>
 	          
 </head>
@@ -125,13 +130,13 @@
 	<div id="modal1" class="modal modal-fixed-footer draggable">
 		<button class="modal-btn-close modal-close" type="button"></button>
 		<div class="row col s12 modal-header center"><h6>Regístrate!</h6></div>
-		<form class="col s12" accept-charset="utf-8" method="POST" name="formRegistroUsuario" id="formRegistroUsuario" onsubmit="return registrarUsuario();">
+		<form name="formRegistroUsuario"  id="formRegistroUsuario" class="col s12" accept-charset="utf-8" method="POST"  onsubmit="return registrarUsuario();">
 		<div class="modal-content">
 			<div class="row">
 				<div class="row">
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">account_circle</i>
-							<input type="text" name="nombres" id="nombres" class="validate" placeholder="nombres" required>
+							<input type="text" name="nombres" id="nombres" data-validation="length required" placeholder="nombres" data-validation-length="3-45">
 							<label data-error="Introduce nombres válidos" data-success="" for="nombres">Nombres</label>	
 						</div>
 						<div class="input-field  col s6">
@@ -172,7 +177,7 @@
 			</div>
 		</div>
 		<div class="modal-footer center">
-			  <button class="btn waves-effect waves-light center " type="submit" name="botonRegistrarUsuario" id="botonResgistrarUsuario" onclick="registrarUsuario();"  >Registrarme </button>			
+			  <input class="btn waves-effect waves-light center " type="submit" name="botonRegistrarUsuario" id="botonResgistrarUsuario" onclick="//registrarUsuario();" value=Registrarme >			
 		</div>
 		</form>
 	</div>

@@ -2,18 +2,8 @@
 Require_once "ControladorBD.php";
 
 class Usuario{
-	private $idUsuario;
-	private $nombres;
-	private $apellidos;
-	private $fechaNacimiento;
-	private $telefono;
-	private $email;
-	private $password;
-	private $fechaRegistro;
-	private $fechaUltimoIngreso;
-	private $idRol_rol;
+	private $idUsuario, $nombres, $apellidos, $fechaNacimiento, $telefono, $email, $password, $fechaRegistro, $fechaUltimoIngreso, $idRol_rol;
 	private $controlBD, $emailExisteBD, $mensaje;
-
 
 	public function __construct()
 	{
@@ -54,17 +44,16 @@ class Usuario{
 		}else{
 			$sql = "INSERT INTO Usuario (nombres, apellidos, fechaNacimiento, telefono, email, password, fechaRegistro, fechaUltimoIngreso, idRol_rol) VALUES ('$nombres', '$apellidos', '$fechaNacimiento','$telefono', '$email', '$passwordMD5', CURRENT_DATE(), null, '3');";
 
-			$result = $controlBD->registrarBD($sql);
-			
-			//echo("resultado".$result);
+			$controlBD = new ControladorBD();
+			$registrarUsuario = $controlBD->registrarBD($sql);
 
-			if( $result == true)
+			if( $registrarUsuario == true)
 			{
 				$mensaje = "ok";
 				echo($mensaje);
 
 			}else{
-				$mensaje = " Hubo un erro al registrar en la BD: $result. ";
+				$mensaje = " Hubo un erro al intentar registrar $email en la BD: $registrarUsuario. Por favor intentelo de nuevo. ";
 				echo($mensaje);
 			}	
 		}
