@@ -136,12 +136,12 @@
 				<div class="row">
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">account_circle</i>
-							<input type="text" name="nombres" id="nombres" data-validation="length required" placeholder="nombres" data-validation-length="3-45">
+							<input type="text" name="nombres" id="nombres" maxlength="45" data-validation="length required" placeholder="nombres" data-validation-length="3-45">
 							<label data-error="Introduce nombres válidos" data-success="" for="nombres">Nombres</label>	
 						</div>
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">account_circle</i>
-							<input type="text" name="apellidos" id="apellidos" class="validate" placeholder="apellidos" required>
+							<input type="text" name="apellidos" id="apellidos" class="validate" maxlength="45" placeholder="apellidos" data-validation="length required" data-validation-length="3-45">
 							<label for="apellidos" data-error="Introduce apellidos validos" data-success="">Apellidos</label>	
 						</div>
 					</div>
@@ -153,23 +153,23 @@
 						</div>
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">phone</i>
-							<input type="tel" name="telefono" id="telefono" class="validate" placeholder="telefono" required>
+							<input type="tel" name="telefono" id="telefono" maxlength="10"  class="validate" placeholder="telefono" data-validation="length required" data-validation-length="10">
 							<label for="telefono" data-error="Ingresa un telefono valido" data-success="">Telefono</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field  col s5">
 							<i class="material-icons prefix">email</i>
-							<input type="email" name="email" id="email" class="validate" required>
+							<input type="email" name="email" id="email" maxlength="45" class="validate" data-validation="length required" >
 							<label data-error="Introduce un email válido" data-success="" for="email">Email</label>	
 						</div>
 						<div class="input-field  col s3">
 							<i class="material-icons prefix">lock_outline</i>
-							<input type="password" name="password" id="password" class="validate" placeholder="password" required>
+							<input type="password" name="password" id="password" maxlength="100" class="validate" placeholder="password" data-validation="length required" data-validation-length="8-100">
 							<label for="password">Password</label>	
 						</div>
 						<div class="input-field  col s3">
-							<input type="password" name="password2" id="password2" class="validate" placeholder="password" required>
+							<input type="password" name="password2" id="password2" maxlength="100" class="validate" placeholder="password" data-validation="length required" data-validation-length="8-100">
 							<label for="password2">Confirme Password</label>	
 						</div>
 					</div>
