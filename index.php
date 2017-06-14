@@ -27,15 +27,16 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 
  	<!-- Compiled and minified CSS -->
- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
  	<link rel="stylesheet" href="css/style.css">
   	<!--Let browser know website is optimized for mobile-->
  	 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> 
   	<!-- Compiled and minified JavaScript -->
- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
  	<script src="https://use.fontawesome.com/500dcb24a1.js"></script>
  	<script src="js/Functions.js"></script>
  	<!-- sweet alert :-->
@@ -64,7 +65,10 @@
 				  hiddenName: true,
 				  formatSubmit: 'yyyy/mm/dd'
 			});
-			$.validate();
+			$.validate({
+				modules : 'security',
+
+			});
 	  	});
 	  	
   	</script>
@@ -137,12 +141,12 @@
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">account_circle</i>
 							<input type="text" name="nombres" id="nombres" maxlength="45" data-validation="length required" placeholder="nombres" data-validation-length="3-45">
-							<label data-error="Introduce nombres válidos" data-success="" for="nombres">Nombres</label>	
+							<label for="nombres">Nombres</label>	
 						</div>
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">account_circle</i>
 							<input type="text" name="apellidos" id="apellidos" class="validate" maxlength="45" placeholder="apellidos" data-validation="length required" data-validation-length="3-45">
-							<label for="apellidos" data-error="Introduce apellidos validos" data-success="">Apellidos</label>	
+							<label for="apellidos">Apellidos</label>	
 						</div>
 					</div>
 					<div class="row">
@@ -153,31 +157,30 @@
 						</div>
 						<div class="input-field  col s6">
 							<i class="material-icons prefix">phone</i>
-							<input type="tel" name="telefono" id="telefono" maxlength="10"  class="validate" placeholder="telefono" data-validation="length required" data-validation-length="10">
-							<label for="telefono" data-error="Ingresa un telefono valido" data-success="">Telefono</label>
+							<input type="tel" name="telefono" id="telefono" maxlength="10"  class="validate" placeholder="telefono" data-validation="length required" data-validation-length="min10">
+							<label for="telefono" >Telefono</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field  col s5">
 							<i class="material-icons prefix">email</i>
-							<input type="email" name="email" id="email" maxlength="45" class="validate" data-validation="length required" >
-							<label data-error="Introduce un email válido" data-success="" for="email">Email</label>	
+							<input type="email" name="email" id="email" maxlength="45" class="validate" data-validation="length required" data-validation-length="min5" >
+							<label  for="email">Email</label>	
 						</div>
 						<div class="input-field  col s3">
 							<i class="material-icons prefix">lock_outline</i>
-							<input type="password" name="password" id="password" maxlength="100" class="validate" placeholder="password" data-validation="length required" data-validation-length="8-100">
+							<input type="password" name="password" id="password" maxlength="100" class="validate" placeholder="password" data-validation="required length" data-validation-length="min6">
 							<label for="password">Password</label>	
 						</div>
 						<div class="input-field  col s3">
-							<input type="password" name="password2" id="password2" maxlength="100" class="validate" placeholder="password" data-validation="length required" data-validation-length="8-100">
+							<input type="password" name="password2" id="password2" maxlength="100" class="validate" placeholder="password" data-validation="confirmation" data-validation-confirm="password">
 							<label for="password2">Confirme Password</label>	
 						</div>
 					</div>
-				</form>
 			</div>
 		</div>
 		<div class="modal-footer center">
-			  <input class="btn waves-effect waves-light center " type="submit" name="botonRegistrarUsuario" id="botonResgistrarUsuario" onclick="//registrarUsuario();" value=Registrarme >			
+			  <input class="btn waves-effect waves-light center " type="submit" name="botonRegistrarUsuario" id="botonResgistrarUsuario" value=Registrarme >			
 		</div>
 		</form>
 	</div>

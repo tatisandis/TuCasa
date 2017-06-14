@@ -34,30 +34,36 @@ class Usuario{
 
 		$passwordMD5 = md5($password);
 
-		$emailExisteBD = $controlBD->consultarBD("SELECT email from Usuario WHERE email='$email';");
-
-		if($emailExisteBD){
-
-			$mensaje = " El email $email ya está registrado.";
+		if($nombres == "" || $apellidos == "" || $fechaNacimiento == "" || $telefono == ""|| $email == "" || $password == "")
+		{
+			$mensaje = "Hay algunos campos incompletos, llenelos por favor";
 			echo($mensaje);
-
 		}else{
-			$sql = "INSERT INTO Usuario (nombres, apellidos, fechaNacimiento, telefono, email, password, fechaRegistro, fechaUltimoIngreso, idRol_rol) VALUES ('$nombres', '$apellidos', '$fechaNacimiento','$telefono', '$email', '$passwordMD5', CURRENT_DATE(), null, '3');";
 
-			$controlBD = new ControladorBD();
-			$registrarUsuario = $controlBD->registrarBD($sql);
+			$emailExisteBD = $controlBD->consultarBD("SELECT email from Usuario WHERE email='$email';");
 
-			if( $registrarUsuario == true)
-			{
-				$mensaje = "ok";
+			if($emailExisteBD){
+
+				$mensaje = " El email $email ya está registrado.";
 				echo($mensaje);
 
 			}else{
-				$mensaje = " Hubo un erro al intentar registrar $email en la BD: $registrarUsuario. Por favor intentelo de nuevo. ";
-				echo($mensaje);
-			}	
-		}
+				$sql = "INSERT INTO Usuario (nombres, apellidos, fechaNacimiento, telefono, email, password, fechaRegistro, fechaUltimoIngreso, idRol_rol) VALUES ('$nombres', '$apellidos', '$fechaNacimiento','$telefono', '$email', '$passwordMD5', CURRENT_DATE(), null, '3');";
 
+				$controlBD = new ControladorBD();
+				$registrarUsuario = $controlBD->registrarBD($sql);
+
+				if( $registrarUsuario == true)
+				{
+					$mensaje = "ok";
+					echo($mensaje);
+
+				}else{
+					$mensaje = " Hubo un erro al intentar registrar $email en la BD: $registrarUsuario. Por favor intentelo de nuevo. ";
+					echo($mensaje);
+				}	
+			}
+		}
 	}
 
 	public function ingresarAlSistema()
