@@ -49,6 +49,10 @@ class PublicacionInmueble{
 			$parqueadero = $_POST["parqueadero"];
 			$descripcion = $_POST["descripcion"];
 
+			if( $tipoPublicacion == "" || $tipoInmueble == "" || $idCiudad == "" || $barrio == "" || $direccion == "" || $precio == "" || $area == "" || $estrato == "" || estadoInmueble  == "" || $descripcion == ""){
+				
+			}
+
 		    for($i = 0; $i < sizeOf($_FILES["foto"]["name"]); $i++)
 		    {   //comprobamos si existe un directorio para subir el archivo si no es así, lo creamos
 			    /*if(!is_dir("uploads/")) 	mkdir("uploads/", 0777);*/
