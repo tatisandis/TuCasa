@@ -1,0 +1,26 @@
+      identificador app facebook 187773271709416
+
+--
+
+SELECT idPublicacionInmueble, idInmueble_inmueble, tipoPublicacion, likesPublicacion, DATE_FORMAT(fechaPublicacion, '%d-%M-%Y') as fechaPub, idCiudad_ciudad, tipo_inmueble, precio, descripcion, idFotos_fotos, srcFotos, nombreCiudad 
+FROM PublicacionInmueble 
+INNER JOIN Inmueble 
+   ON (idInmueble  = idInmueble_inmueble AND tipo_inmueble = 'Casa') 
+LEFT JOIN Fotos 
+   ON  Fotos.idfotos = Inmueble.idFotos_fotos 
+LEFT JOIN Ciudad 
+   ON (Ciudad.idCiudad = Inmueble.idCiudad_ciudad AND Ciudad.nombreCiudad = 'Buenaventura')
+    WHERE tipoPublicacion = 'Venta'
+
+
+--
+
+SELECT idPublicacionInmueble, idInmueble_inmueble, tipoPublicacion, likesPublicacion, DATE_FORMAT(fechaPublicacion, '%d-%M-%Y') as fechaPub, idCiudad_ciudad, tipo_inmueble, precio, descripcion, idFotos_fotos, srcFotos, nombreCiudad 
+FROM PublicacionInmueble 
+INNER JOIN Inmueble 
+   ON (idInmueble  = idInmueble_inmueble) 
+LEFT JOIN Fotos 
+   ON  Fotos.idfotos = Inmueble.idFotos_fotos 
+LEFT JOIN Ciudad 
+   ON (Ciudad.idCiudad = Inmueble.idCiudad_ciudad )
+    WHERE tipoPublicacion = 'Venta' AND tipo_inmueble = 'Casa' AND tipoPublicacion = 'Venta'

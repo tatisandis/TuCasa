@@ -5,9 +5,9 @@
  */
 
 	session_start();
-	require_once("include/Usuario.php");
+	require_once("../include/Usuario.php");
 
-	if(isset($_SESSION['email']) && $_SESSION['loggedin'] == true)
+	if(isset($_SESSION['email']) && $_SESSION['loggedin'] == true && ( $_SESSION["idRol"] = 1 || $_SESSION["idRol"] = 2 ))
 	{
 			//Si esta autenticado Estas variables valen session_status() = 2 y $_SESSION['loggedin'] = 1;
 			//echo("<h2>sesion iniciada. Estado:".session_status()."Sesion Loggedin:".$_SESSION['loggedin']."</h2>");
@@ -15,54 +15,50 @@
 		$usuario = $consultar->consultarUsuario();
 
 	} else {
-		header('Location: BuscarInmueble.php');
+		header('Location: login.php');
 		//echo("<h3>Sesion No. estado:::".session_status().".</h3>");
 	}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tu Casa - Busqueda</title>
+	<!--Let browser know website is optimized for mobile-->
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+ 	<meta charset="UTF-8"/>
+	<title>Tu Casa - Admin</title>
+	
 	<!-- Fuentes -->
 	<link href="https://fonts.googleapis.com/css?family=Devonshire" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css?family=Devonshire|Montserrat+Alternates" rel="stylesheet"> 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<!-- Iconos Font Awesome -->
+	<!--<link rel="stylesheet" href="../assets/css/font-awesome.min.css">-->
+	<!--<script src="https://use.fontawesome.com/500dcb24a1.js"></script>-->
+	<script src="https://use.fontawesome.com/d81e3f5289.js"></script>
 
-	<!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		
+	<!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	 	
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   	
-	<!--Let browser know website is optimized for mobile-->
- 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
- 	
-	<!-- Iconos Font Awesome -->
-	<!--<link rel="stylesheet" href="assets/css/font-awesome.min.css">-->
-	<script src="https://use.fontawesome.com/d81e3f5289.js"></script>
-	
-	
-	
-  	
  	<!-- sweet alert :-->
- 	<script src="assets/plugins/sweetalert.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
+ 	<script src="../assets/plugins/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../assets/css/sweetalert.css">
 
 	<!-- Estilos y funciones Javascript propias :-->
-	<link rel="stylesheet" href="assets/css/style.css">
-	<script type="text/javascript" src="assets/js/Functions.js"></script>
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<script type="text/javascript" src="../assets/js/Functions.js"></script>
 	
 	<!-- jquery-form-validator -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.61/jquery.form-validator.min.js" type="text/javascript" charset="utf-8" ></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.61/lang/es.js" type="text/javascript" charset="utf-8"></script>
  	
- 	<meta charset="UTF-8"/>
-	<!--<link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+ 	
+ 	<!--<link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script> 
 	<script type="text/javascript" src="js/nouislider.min.js"></script>-->
-		
-	<!-- sweet alert :-->
  	<script>
  		$(document).ready(function(){
      		$('.materialboxed').materialbox();
@@ -70,12 +66,12 @@
 			$('.collapsible').collapsible();
   			$('.dropdown-button').dropdown({constrain_width:false});
 		});
-    </script>   
+  	</script>   
 </head>
 <body>
 <header>
 	<nav class="nav-fixed">
-		<div class="nav-wrapper container">
+		<div class="nav-wrapper">
 			<ul class="left">
 				<li>
 				<a href="index.php" class="brand-logo logo left">Tu casa </a>
@@ -84,6 +80,7 @@
 			<a href="#" data-activates="nav-mobile" class="button-collapse right"><i class="material-icons md-light">menu</i></a>
 			<input type="hidden" name="idUsuarioSesion" id="idUsuarioSesion" value="<?php echo($_SESSION['idUsuario']);?>">
 			<input type="hidden" name="emailSesion" id="emailSesion" value="<?php echo($_SESSION['email']);?>">
+			<input type="hidden" name="idRol" id="idRol" value="<?php echo($_SESSION['idRol']) ?>">
 				
 			<div class="header-search-wrapper hide-on-med-and-down">
 				<!--<i class="material-icons" >search</i>-->
@@ -97,18 +94,20 @@
 			<ul  class="right hide-on-large-only">
 				
 				<li><a href="#" title="<?php echo($_SESSION['email']);?>"><i class="fa fa-user-circle"></i></a></li>
-				<li><a onclick="salir();" title="Iniciar Sesión"><i class="fa fa-sign-out"></i></a></li>
+				<li><a onclick="salir();"><i class="fa fa-sign-out"></i></a></li>
 			</ul>
 		</div>
 	</nav>
+	<div class="container">
+	</div>
 	<form accept-charset="utf-8" method="POST">
-	<ul id="nav-mobile" class="side-nav">
-		<li class="user-details">
+	<ul id="nav-mobile" class="side-nav fixed ">
+		<li class="user-details ">
 			<div class="row">
 				<div class="col s4 m4 l4">
-					<img class="circle responsive-img" src="assets/images/<?php if($usuario[0]["avatar"] == "" || $usuario[0]["avatar"] == "NULL"){ 
+					<img class="circle responsive-img" src="../assets/images/<?php if($usuario[0]["avatar"] == "" || $usuario[0]["avatar"] == "NULL"){ 
 						echo('avatar_defecto.png');
-					}else echo($usuario[0]['avatar']); ?>" alt="">
+					}else echo($usuario[0]['avatar']); ?>" alt="avatar">
 				</div>
 				<div class="col s8 m8 l8">
 					<a class="dropdown-button waves-effect waves-light" href="#" data-beloworigin="true" data-activates="dropdownUser">
@@ -136,7 +135,10 @@
 
 		</li>
 		<li class="bold">
-			<a href="modules/publicacion_inmueble/FormPublicarInmueble.php" target="iframe"><i class="material-icons">add_to_queue</i>Publicar Inmueble</a> 
+			<a href="Dashboard.php" target="iframe"><i class="material-icons">dashboard</i>Dashboard</a> 
+		</li>
+		<li class="bold">
+			<a href="Publicaciones.php" target="iframe"><i class="material-icons">home</i>Publicaciones</a> 
 		</li>
 		<li class="no-padding">
 			<ul class="collapsible" data-collapsible="accordion">
@@ -145,10 +147,10 @@
 						Consultar</div>
 					<div class="collapsible-body">
 						<ul>
-							<li><a href="modules/PanelPrincipalPublicador.php" target="iframe"><i class="fa fa-toggle-on" aria-hidden="true"></i>
+							<!--<li><a href="" target="iframe"><i class="fa fa-toggle-on" aria-hidden="true"></i>
 Activas</a></li>
-							<li><a href="modules/PanelPrincipalPublicador.php" target="iframe"><i class="fa fa-toggle-off" aria-hidden="true"></i>
-Inactivas</a></li>
+							<li><a href="" target="iframe"><i class="fa fa-toggle-off" aria-hidden="true"></i>
+Inactivas</a></li>-->
 						</ul>
 					</div>
 
@@ -162,29 +164,10 @@ Inactivas</a></li>
 	</ul>
 	</form>
 </header>
-
-	<div class="container">
-	<div class="row">
-        <div class="col s3">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="col s9">
-        	<iframe src="modules/PanelPrincipalPublicador.php" width="80%" name="iframe" id="iframe" onload="cargarHeight();">
-			</iframe>
-		</div>
-    </div>
-	</div>
-
+<!--<main>-->
+	<iframe src="Dashboard.php" width="95%" name="iframe" id="iframe" onload="cargarHeight();">
+	</iframe>
+<!--</main>-->
 <footer class="page-footer">
 	<div class="container">
 		<div class="footer-copyright">
@@ -194,6 +177,5 @@ Inactivas</a></li>
 		</div>
 	</div>
 </footer>
-
 </body>
 </html>

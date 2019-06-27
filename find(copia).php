@@ -11,7 +11,7 @@
 			//Si esta autenticado Estas variables valen session_status() = 2 y $_SESSION['loggedin'] = 1;
 			//echo("<h2>sesion iniciada. Estado:".session_status()."Sesion Loggedin:".$_SESSION['loggedin']."</h2>");
 	} else {
-		header('Location: index.php');
+		//header('Location: index.php');
 		//echo("<h3>Sesion No. estado:::".session_status().".</h3>");
 	}
 	/*

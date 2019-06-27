@@ -1,0 +1,434 @@
+body{
+	padding-top: 4%;
+	font-family: 'Montserrat Alternates', sans-serif;	
+	/*background-color: #f9f9f9;*/
+	background-color: #f5f5f5;
+	margin:0;
+}
+
+header,main, footer{
+	
+	/*background: #000000;*/
+	/*color: #F8F9F9;*/
+	
+}
+
+main {
+  	background-color: #eeeeee;
+  	margin: 0;
+  	padding-top: 30px;
+  	min-height: 82.5vh;
+  	padding-left: 280px;
+ 	/*flex: 1 0 auto;*/
+  }
+
+footer{
+	padding-left: 250px;
+	color: #eeeeee#;
+	/*z-index: 999;*/
+	
+}
+
+.gris { 
+	background-color:#393e46 !important;
+}
+    
+nav{
+	background-color: #000000;
+}
+
+.nav-fixed {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin-bottom: 20px;
+    z-index: 997;
+}
+
+nav ul a{
+	font-size: 18px;
+}
+
+nav ul li.active, nav ul a:hover{
+	background-color: rgb(0,173,181);
+}
+
+.side-nav.fixed{
+	top: 64px;
+	font-size: 13px;
+	color: #393e46 !important;
+	/*padding-left: 10px;*/
+	max-width: 240px;
+	/*max-height: 84%;*/
+}
+
+li.bold{
+	font-weight:bold;
+}
+
+.logo{
+	font-family: 'Devonshire', cursive;
+	font-size: 4.1rem !important;
+	color: #FDFEFE;
+}
+
+.logo_negro{
+	font-family: 'Devonshire', cursive;
+	font-size: 4.1rem !important;
+	color: #000000;
+}
+
+.page-footer{
+	padding-top: 10px;
+	background-color: #000 !important;
+}
+
+.row_bottom{
+	margin-bottom: 0 !important;
+}
+
+section .image{
+	background: #FFFFFF url('../images/Disenio-de-sala-comedor-y-cocina-moderna.jpg') no-repeat center center;
+	background-size: cover;
+	max-width: 100%;
+	/*height: 550px;*/
+	height: 83.4vh;
+}
+
+#divFind{
+	margin: 3% 0;
+	padding: 3% 3%;
+	border: 1px solid #F8F9F9;
+	background-color: rgba(0, 0, 0,0.5);
+	border-radius: 20px;
+	position: absolute;
+	width: inherit;
+}
+
+input#ubicacion{
+	padding: 10px 10px;
+	background-color: #eeeeee;
+	border-radius: 5px;
+	width: 100%;
+}
+
+.find select.browser-default{
+	background-color: #eeeeee;
+	border-radius: 5px;
+}
+
+
+div#oferta label{
+	color:#eeeeee;
+	font-size: 1.3em;
+}
+
+[type="radio"]:not(:checked)+ label::before{
+	border: 2px solid #eeeeee;
+}
+
+div.find button{
+	height: 42px;
+}
+
+h1{
+	color: #eeeeee;
+}
+
+h4{
+	color: #eeeeee;
+}
+
+
+.noUiHorizontal{
+	height: 3px !important;
+}
+
+.material-icons.md-light{
+	color: rgba(255, 255, 255, 1); 
+}
+
+@media only screen and (max-width: 992px) {
+	header,main,footer {
+		padding-left:0
+	}
+}
+
+.card-image-reduce{
+	max-width: 40% !important;
+}
+
+
+@media only screen and (max-width: 600px){
+	.card.horizontal{
+		  display: inline-block;
+	}
+
+	.card.horizontal .card-image{
+		  max-width: 100%;
+	}
+}
+
+.input-field .prefix.active{
+	color: #00adb5;
+}
+
+.input-field label{
+	color: #393e46;	
+}
+
+input[type="text"]:focus:not([readonly]){
+	border-bottom: 1px solid #00adb5;
+	box-shadow: 0 1px 0 0 #00adb5;
+}
+
+button, .btn{
+	background-color: #00adb5;	
+}
+
+.background-azul{
+background-color: #00adb5;		
+}
+
+.modal-header{
+	background: #fff;
+	border-bottom: 1px solid #e1e8ed;
+	border-radius: 6px 6px 0 0;
+	/*cursor: move;*/
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.modal .modal-content, .modal-fixed-footer{
+	padding: 0 !important;
+}
+
+.modal-btn-close{
+	background: #FFFFFF url('../images/ic_close_black_24dp_1x.png') no-repeat center center;
+    height: 20px;
+	padding: 0;
+	position: absolute;
+	right: 10px;
+	top: 9px;
+	width: 20px;
+	background-color: transparent;
+	cursor: pointer;
+	border: 0;
+}
+
+.user-details{
+	background-color: #00adb5;
+	padding: 15px 0 15px 0;
+}
+
+.header-search-wrapper{
+	margin: 10px auto 0 240px;
+	width: calc(100% - 750px);
+	height: 40px;
+	display: inline-block;
+	position: relative;
+}
+
+.header-search-wrapper i {
+    position: absolute;
+    font-size: 24px;
+    top: 6px;
+    left: 24px;
+    line-height: 32px !important;
+    -webkit-transition: color 200ms ease;
+    transition: color 200ms ease;
+}
+
+input.header-search-input{
+	display: block;
+	padding: 8px 8px 8px 72px;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.3);
+	height: 24px;
+	transition: all 200ms ease;
+	border: none;
+	/*font-size: 16px;*/
+	font-weight: 400;
+	outline: none;
+	border-radius:3px; 
+}
+
+input.header-search-input:hover {
+	background:rgba(255,255,255,0.5)
+}
+input.header-search-input:focus {
+	color:#333;
+	background:#fff;
+	border-bottom:none !important;
+	box-shadow:none !important;
+}
+.header-search-wrapper i:focus{
+	color:#444;
+}
+
+.side-nav li > a > i, .side-nav li > a > i.material-icons { line-height: inherit;margin: 0 10px 0 0;}
+.side-nav a{ padding: 0 10px; color: #000000; }
+.side-nav.fixed .collapsible-header{padding: 0 10px}
+
+.dropdown-content li > a {font-size: 12px;}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+iframe{
+	border: 0;
+	background: #f9f9f9;
+	
+}
+
+ul.card-action-buttons{
+	margin: -26px 10px 0 0;
+	text-align: right;
+}
+
+ul.card-action-buttons li {
+	display:inline-block;
+	padding-left:5px
+}
+
+.collapsible-body {padding: 0}
+
+/*.dropdown-content li > span{ font-size: 0.9rem; padding: 6.5px 16px;}*/
+
+.side-nav li > a{
+	padding: 6.5px 16px;
+}
+
+legend{
+	padding: 20px 5px;
+    color: #00adb5;
+}
+
+.form-error{
+	font-size: 12px;
+	line-height: 70%;
+	color: red;
+}
+
+ .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+#login-page{
+   width: 300px;
+}
+
+.collection-header {
+    font-size: 1.14rem;
+    font-weight: 500;
+}
+
+.circulo-icono{
+	background: #30426a;
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+.circulo-icono-med{
+	background: #30426a;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
+.circulo-icono i {
+    line-height: 66px;
+    color: #fff;
+    font-size: 30px;
+}
+
+.card-content .title {
+    font-size: 28px;
+    display: block;
+}
+
+img.small{	width: 60px;}
+
+.material-icons.md-dark { color: green}
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26);}
+
+.fa.fa-heart{
+	color: #fc5f5f;
+}
+
+table thead th a i{
+    /*background-image: url("../images/sort_both.png");*/
+    /*background-repeat: no-repeat;*/
+	position: center right;
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+        border-bottom-color: transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #3c763d;
+	background-color:#eeeeee;
+	/* #dff0d8;*/
+	border-color: #d6e9c6;
+}
+
+.border-box{
+	border-top: 3px solid #00adb5;
+}
+/*
+tr, th .table-bordered {
+    border: 1px solid #f4f4f4;
+}*/
+
+thead{
+	background-color: #FFFFFF;
+	color: #333;
+	font-weight: 800px;
+}
+
+.row .col {
+	padding: .30rem .75rem !important;
+}
+
+aside h5{
+	color: #333;
+	display: block;
+	font-size: 26px;
+	font-weight: 600;
+	line-height: 30px;
+}
+
+/*
+.table-bordered {
+    border: 1px solid #f4f4f4;
+    color: #333;
+}
+
+table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    border-bottom-width: 2px;
+}
+
+table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #f4f4f4;
+}
+th > a{
+	color: #333;
+}*/
